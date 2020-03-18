@@ -1,0 +1,1 @@
+# Encapsulate a dom box
