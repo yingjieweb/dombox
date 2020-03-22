@@ -1,7 +1,7 @@
-### Encapsulate a dom box
+## Encapsulate a dom box
 <p align="center">
   <span>中文</span> |
   <a href="https://github.com/yingjieweb/dombox/tree/master/lang/english">英文</a>
 </p>
----
+------
 只是一段中文说明文档
