@@ -1,5 +1,7 @@
 ### Encapsulate a dom box
 <p align="center">
-  <span>English</span> |
-  <a href="https://github.com/yingjieweb/dombox">中文</a>
+  <a href="https://github.com/yingjieweb/dombox">中文</a> |
+  <span>English</span>
 </p>
+---
+This is an English explanatory document
