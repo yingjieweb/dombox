@@ -14,10 +14,20 @@
 &nbsp;&nbsp; 根据上述步骤将 jsdom 引入项目中后，可以通过 dom.API 的方式对 dombox 库中封装好的方法进行调用，具体的 API 详细介绍
 如下，相信你在使用的过程中一定会觉得本库比 JavaScript 的原生 API 高效的多。
 
-1 **create('html')**
+**1。 create('html')**
 
 &nbsp;&nbsp; create() 接收一个 html 标签字符串，如：`let div = dom.create('div');` 可以创建一个 div 节点。
+```JavaScript
+let div = dom.create('<div>div</div>');
+let span = dom.create('<span>span</span>');
+let text = dom.create('<text>text</text>');
+console.log(div,span,text);  //<div>div</div> <span>span</span> <text>text</text>
+```
 
-2 **append(parent, node)**
+**2。 append(parent, node)**
 
 &nbsp;&nbsp; append(parent, node) 接收两个参数，其中第一个参数为节点要插入的父节点，第二个参数为要插入的节点。
+```JavaScript
+dom.append(span,text);
+console.log(span); //<span>span<text>text</text></span>
+```
