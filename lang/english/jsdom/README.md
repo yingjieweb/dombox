@@ -8,4 +8,5 @@
 
 ------
 
-This is an English js dom documentation.
+&nbsp;&nbsp; dombox is an efficient, streamlined, and feature-rich library of JavaScript tools.It provides an
+easy-to-use API that makes things like HTML document traversal and manipulation, and event-handling operations easier.
