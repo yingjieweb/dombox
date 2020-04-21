@@ -23,9 +23,9 @@ let span = dom.create('<span>span</span>');
 let text = dom.create('<text>text</text>');
 console.log(div,span,text);  //<div>div</div> <span>span</span> <text>text</text>
 ```
-**2. before()** - 根据参数设定，在匹配元素的前面插入内容
+**2. before(node)** - 根据参数设定，在匹配元素的前面插入内容
 
-&nbsp;&nbsp; before() 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，前插入。
+&nbsp;&nbsp; before(node1, node2) 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，前插入。
 ```JavaScript
 dom.before(span,div);
 console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</text>
@@ -37,11 +37,17 @@ console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</te
 dom.after(span,text);
 console.log(span.parentNode);  //<span>span</span> <text>text</text>
 ```
-**4. append(parent, node)**
+**4. append(parent, node)** -
 
 &nbsp;&nbsp; append(parent, node) 接收两个参数，其中第一个参数为节点要插入的父节点，第二个参数为要插入的节点。
 ```JavaScript
 dom.append(span,text);
 console.log(span); //<span>span<text>text</text></span>
 ```
+**5. wrap(node,parent)** - node节点直接从原来的位置跳到parent节点中
 
+&nbsp;&nbsp; wrap(node,parent) 接收两个参数，其中第一个参数为dom节点，第二个参数为要插入的节点。
+```JavaScript
+dom.wrap(span,div);
+console.log(div);  //<div>div<span>span<text>text</text></span></div>
+```
