@@ -14,18 +14,18 @@
 &nbsp;&nbsp; 根据上述步骤将 jsdom 引入项目中后，可以通过 dom.API 的方式对 dombox 库中封装好的方法进行调用，具体的 API 详细介绍
 如下，相信你在使用的过程中一定会觉得本库比 JavaScript 的原生 API 高效的多。
 
-**1. create()** - 创建 dom 元素
+**1. create(node)** - 创建 dom 元素
 
-&nbsp;&nbsp; create() 接收一个可包裹文本节点的 html 标签字符串，如：`let div = dom.create('<div>div</div>');` 可以创建一个 div 节点。
+&nbsp;&nbsp; create(node) 接收一个可包裹文本节点的 html 标签字符串，如：`let div = dom.create('<div>div</div>');` 可以创建一个 div 节点。
 ```JavaScript
 let div = dom.create('<div>div</div>');
 let span = dom.create('<span>span</span>');
 let text = dom.create('<text>text</text>');
 console.log(div,span,text);  //<div>div</div> <span>span</span> <text>text</text>
 ```
-**2. before(node)** - 根据参数设定，在匹配元素的前面插入内容
+**2. before(node1, node2)** - 根据参数设定，在匹配元素的前面插入
 
-&nbsp;&nbsp; before(node1, node2) 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，前插入。
+&nbsp;&nbsp; before() 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，前插入。
 ```JavaScript
 dom.before(span,div);
 console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</text>
@@ -37,16 +37,16 @@ console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</te
 dom.after(span,text);
 console.log(span.parentNode);  //<span>span</span> <text>text</text>
 ```
-**4. append(parent, node)** -
+**4. append(parentNode, node)** - 在匹配的 parentNode 元素里面的末尾处插入 node 节点。
 
-&nbsp;&nbsp; append(parent, node) 接收两个参数，其中第一个参数为节点要插入的父节点，第二个参数为要插入的节点。
+&nbsp;&nbsp; append(parentNode, node) 接收两个参数，其中第一个参数为节点要插入的父节点，第二个参数为要插入的节点。
 ```JavaScript
 dom.append(span,text);
 console.log(span); //<span>span<text>text</text></span>
 ```
-**5. wrap(node,parent)** - node节点直接从原来的位置跳到parent节点中
+**5. wrap(node,parentNode)** - node节点直接从原来的位置跳到parent节点中
 
-&nbsp;&nbsp; wrap(node,parent) 接收两个参数，其中第一个参数为dom节点，第二个参数为要插入的节点。
+&nbsp;&nbsp; wrap(node,parentNode) 接收两个参数，其中第一个参数为dom节点，第二个参数为要插入的节点。
 ```JavaScript
 dom.wrap(span,div);
 console.log(div);  //<div>div<span>span<text>text</text></span></div>
