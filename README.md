@@ -51,3 +51,8 @@ console.log(span); //<span>span<text>text</text></span>
 dom.wrap(span,div);
 console.log(div);  //<div>div<span>span<text>text</text></span></div>
 ```
+**6. remove(node)** - 将node元素从其父节点中移除，并作为返回值返回。
+```JavaScript
+let temp = dom.remove(text);
+console.log(temp);  //<text>text</text>
+```
