@@ -23,21 +23,21 @@ let span = dom.create('<span>span</span>');
 let text = dom.create('<text>text</text>');
 console.log(div,span,text);  //<div>div</div> <span>span</span> <text>text</text>
 ```
-**2. before(node1, node2)** - 根据参数设定，在匹配元素的前面插入
+**2. before(node1, node2)** - 在匹配元素的前面插入
 
 &nbsp;&nbsp; before() 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，前插入。
 ```JavaScript
 dom.before(span,div);
 console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</text>
 ```
-**3. after(node1, node2)** - 根据参数设定，在匹配元素的后面插入内容
+**3. after(node1, node2)** - 在匹配元素的后面插入内容
 
 &nbsp;&nbsp; after() 接收两个参数，第一个表示要插入的节点位置，第二个表示要插入的节点本身，后插入。
 ```JavaScript
 dom.after(span,text);
 console.log(span.parentNode);  //<span>span</span> <text>text</text>
 ```
-**4. append(parentNode, node)** - 在匹配的 parentNode 元素里面的末尾处插入 node 节点。
+**4. append(parentNode, node)** - 在匹配的parentNode元素里面的末尾处插入 node 节点
 
 &nbsp;&nbsp; append(parentNode, node) 接收两个参数，其中第一个参数为节点要插入的父节点，第二个参数为要插入的节点。
 ```JavaScript
@@ -51,7 +51,9 @@ console.log(span); //<span>span<text>text</text></span>
 dom.wrap(span,div);
 console.log(div);  //<div>div<span>span<text>text</text></span></div>
 ```
-**6. remove(node)** - 将node元素从其父节点中移除，并作为返回值返回。
+**6. remove(node)** - 将node元素从其父节点中移除
+
+&nbsp;&nbsp; remove(node) 参数为要从dom树种移除的节点，该方法会将移除的节点作为返回值。
 ```JavaScript
 let temp = dom.remove(text);
 console.log(temp);  //<text>text</text>
