@@ -4,11 +4,11 @@ window.dom = {
     container.innerHTML = node.trim();
     return container.content.firstChild;
   },
-  after: function (node, newNode) { //after(){}
-    node.parentNode.insertBefore(newNode, node.nextSibling); //即使node节点没有next兄弟也能成功
-  },
   before: function (node, newNode) { //before(){}
     node.parentNode.insertBefore(newNode, node);
+  },
+  after: function (node, newNode) { //after(){}
+    node.parentNode.insertBefore(newNode, node.nextSibling); //即使node节点没有next兄弟也能成功
   },
   append: function (parent, node) { //append(){}
     parent.appendChild(node);
