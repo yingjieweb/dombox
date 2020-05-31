@@ -1,33 +1,54 @@
 //1. create
+// let div = dom.create('<div>div</div>');
+// let span = dom.create('<span>span</span>');
+// let text = dom.create('<text>text</text>');
+// console.log(div, span, text);  //<div>div</div> <span>span</span> <text>text</text>
+
+//2. before
+// let span = dom.create('<span>span</span>');
+// let div = dom.create('<div>div</div>');
+// dom.before(span, div);
+// console.log(span.parentNode);  //<div>div</div> <span>span</span>
+
+//3. after
+// let span = dom.create('<span>span</span>');
+// let text = dom.create('<text>text</text>');
+// dom.after(span, text);
+// console.log(span.parentNode);  //<span>span</span> <text>text</text>
+
+//4. append
+// let span = dom.create('<span>span</span>');
+// let text = dom.create('<text>text</text>');
+// dom.append(span, text);
+// console.log(span); //<span>span<text>text</text></span>
+
+//5. wrap
+// let span = dom.create('<span>span</span>');
+// let div = dom.create('<div>div</div>');
+// dom.wrap(span, div);
+// console.log(div);  //<div>div<span>span</span></div>
+
+//6. remove
+// let span = dom.create('<span>span</span>');
+// let text = dom.create('<text>text</text>');
+// dom.append(span, text);
+// console.log(span);  //<span>span<text>text</text></span>
+// let temp = dom.remove(text);
+// console.log(temp);  //<text>text</text>
+// console.log(span);  //<span>span</span>
+
+//7. empty
 let div = dom.create('<div>div</div>');
 let span = dom.create('<span>span</span>');
 let text = dom.create('<text>text</text>');
-console.log(div, span, text);  //<div>div</div> <span>span</span> <text>text</text>
-
-//2. before
-dom.before(span, div);
-console.log(span.parentNode);  //<div>div</div> <span>span</span>
-
-//3. after
-dom.after(span, text);
-console.log(span.parentNode);  //<div>div</div> <span>span</span> <text>text</text>
-
-//4. append
 dom.append(span, text);
-console.log(span); //<span>span<text>text</text></span>
-
-//5. wrap
-dom.wrap(span, div);
-console.log(div);  //<div>div<span>span</span></div>
-
-//6. remove
-let temp = dom.remove(text);
-console.log(temp);  //<text>text</text>
-
-//7. empty
-dom.empty(div);
+dom.append(div, span);
+console.log(div); //<div>div<span>span<text>text</text></span></div>
+let temp = dom.empty(div);
 console.log(div); //<div></div>
+console.log(temp) //[text, span]
 
+/*
 //8. attr
 dom.attr(div, 'id', 'web');
 console.log(dom.attr(div, 'id')); //web
@@ -93,4 +114,4 @@ dom.each(first, fun);
 
 //21. index
 let scope1 = dom.find('#scope');
-console.log(dom.index(scope1[0]));  //0
+console.log(dom.index(scope1[0]));  //0*/

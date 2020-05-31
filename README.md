@@ -8,8 +8,8 @@
 
 ------
 
-&nbsp;&nbsp; dombox 是一个高效、精简并且功能丰富的JavaScript工具库。它提供的API易于使用，这让诸如HTML文档遍历和操作、事件处理
-操作更加简单。可以下载 dombox.zip 解压后将 jsdom.js 文件以 `<script src='./jsdom.js'></script>` 的方式引入项目中。
+&nbsp;&nbsp; dombox 是一个高效、精简并且功能丰富的JavaScript工具库。它提供的API易于使用，这让诸如HTML文档遍历和操作、事件处
+理操作更加简单。可以下载 dombox.zip 解压后将 jsdom.js 文件以 `<script src='./jsdom.js'></script>` 的方式引入项目中。
 
 &nbsp;&nbsp; 根据上述步骤将 jsdom 引入项目中后，可以通过 dom.API 的方式对 dombox 库中封装好的方法进行调用，具体的 API 详细介绍
 如下，相信你在使用的过程中一定会觉得本库比 JavaScript 的原生 API 高效的多。
@@ -30,7 +30,7 @@ console.log(div, span, text);  //<div>div</div> <span>span</span> <text>text</te
 let span = dom.create('<span>span</span>');
 let div = dom.create('<div>div</div>');
 dom.before(span, div);
-console.log(span.parentNode);  //<span>span</span> <div>div</div>
+console.log(span.parentNode);  //<div>div</div> <span>span</span>
 ```
 **3. after(node1, node2)** - 在匹配元素的后面插入新的节点，使二者成为兄弟节点
 
@@ -70,4 +70,18 @@ console.log(span);  //<span>span<text>text</text></span>
 let temp = dom.remove(text);
 console.log(temp);  //<text>text</text>
 console.log(span);  //<span>span</span>
+```
+**7. empty(node)** - 将node元素内的所有子元素清除
+
+&nbsp;&nbsp; empty(node) 参数为要被清空内容的元素节点，该方法会以数组的形式将移除的子元素作为返回值。
+```JavaScript
+let div = dom.create('<div>div</div>');
+let span = dom.create('<span>span</span>');
+let text = dom.create('<text>text</text>');
+dom.append(span, text);
+dom.append(div, span);
+console.log(div); //<div>div<span>span<text>text</text></span></div>
+let temp = dom.empty(div);
+console.log(div); //<div></div>
+console.log(temp) //[text, span]
 ```
