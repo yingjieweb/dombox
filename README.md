@@ -107,3 +107,14 @@ console.log(dom.html(div));  //div
 dom.html(div, '<span id="span">span</span>');
 console.log(div); //<div><span id="newSpan"></span></div>
 ```
+**11. style(node, name, value)** - 读写node节点的style属性
+
+&nbsp;&nbsp; style(node, name, value) 接收三个参数时，node为要被设置style属性的节点，name表示将要为node节点设置的style属性，value为相应的style属性的属性值。接收两个参数时，根据name参数的类型分为两种情况，如果name参数为 `border` 或 `color` 这样的形式，则style方法会读取node节点的name属性值，并返回；如果name参数的类型为`border:{1px solid red}`这样的形式，则style方法会将node节点的border属性设置为 `1px solid red`
+```JavaScript
+let div = dom.create('<div>div</div>');
+dom.style(div, 'border', '1px solid red');
+console.log(div); //<div style="border:1px solid red;">div</div>
+console.log(dom.style(div, 'border'));  //1px solid red
+dom.style(div, {border: '1px solid green'});
+console.log(div); //<div style="border:1px solid green;">div</span></div>
+```

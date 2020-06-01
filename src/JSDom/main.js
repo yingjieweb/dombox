@@ -64,19 +64,20 @@
 //11. style
 // let div = dom.create('<div>div</div>');
 // dom.style(div, 'border', '1px solid red');
-// console.log(div); //<div id="web" style="border:1px solid red;"><span id="newSpan"></span></div>
+// console.log(div); //<div style="border:1px solid red;">div</div>
 // console.log(dom.style(div, 'border'));  //1px solid red
 // dom.style(div, {border: '1px solid green'});
-// console.log(div); //<div id="web" style="border:1px solid green;"><span id="newSpan"></span></div>
+// console.log(div); //<div style="border:1px solid green;">div</span></div>
 
-/*
 //12. class
+let div = dom.create('<div>div</div>');
 dom.class.add(div, 'header');
-console.log(div); //<div id="web" class="header" style="border:1px solid green;"><span id="newSpan"></span></div>
+console.log(div); //<div class="header">div</div>
 console.log(dom.class.has(div, 'header'));  //true
 dom.class.remove(div, 'header');
-console.log(div); //<div id="web" class style="border:1px solid green;"><span id="newSpan"></span></div>
+console.log(div); //<div class>div</div>
 
+/*
 //13. on & off
 function fun() {
   console.log(0.0)
