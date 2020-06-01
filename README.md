@@ -111,8 +111,8 @@ console.log(div); //<div><span id="newSpan"></span></div>
 
 &nbsp;&nbsp; style(node, name, value) 接收三个参数时，node为要被设置style属性的节点，name表示将要为node节点设置的style属性，value为相应的style属性的属性值。
 
-&nbsp;&nbsp; style(node, name, value) 接收两个参数时，根据name参数的类型分为两种情况，如果name参数为 `border` 或 `color` 这样的形
-式，则style方法会读取node节点的name属性值，并返回；如果name参数的类型为`border:{1px solid red}`这样的形式，则style方法会将node节点的border属性设置为 `1px solid red`。
+&nbsp;&nbsp; style(node, name, value) 接收两个参数时，根据name参数的类型分为两种情况，如果name参数为 `border` 或 `color` 这样的字
+符串形式，则style方法会读取node节点的name属性值，并返回；如果name参数的类型为`border:{1px solid red}`这样的形式，则style方法会将node节点的border属性设置为 `1px solid red`。
 ```JavaScript
 let div = dom.create('<div>div</div>');
 dom.style(div, 'border', '1px solid red');
@@ -120,4 +120,17 @@ console.log(div); //<div style="border:1px solid red;">div</div>
 console.log(dom.style(div, 'border'));  //1px solid red
 dom.style(div, {border: '1px solid green'});
 console.log(div); //<div style="border:1px solid green;">div</span></div>
+```
+**12. class.add(node, string)、class.remove(node, string)、class.has(string) - 新增/移除/判断是否含有class
+
+- class.add(node, string)  表示给node节点新增一个值为string的class属性。
+- class.remove(node, string)  表示将node节点的值为string的class属性移除。
+- class.add(node, string)  判断node节点是否含有值为string的class属性，有则返回true，否则返回false。
+```javascript
+let div = dom.create('<div>div</div>');
+dom.class.add(div, 'header');
+console.log(div); //<div class="header">div</div>
+console.log(dom.class.has(div, 'header'));  //true
+dom.class.remove(div, 'header');
+console.log(div); //<div class>div</div>
 ```

@@ -79,7 +79,7 @@ window.dom = {
         // dom.style(div, {color: 'red'})
       } else if (name instanceof Object) {
         const object = name;
-        for (let key in object) {
+        for (let key in object) { //for in对象时，key表示键，for in数组时，key表示下标
           node.style[key] = object[key];
         }
       }
