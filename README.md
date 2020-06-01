@@ -121,7 +121,7 @@ console.log(dom.style(div, 'border'));  //1px solid red
 dom.style(div, {border: '1px solid green'});
 console.log(div); //<div style="border:1px solid green;">div</span></div>
 ```
-**12. class.add(node, string)、class.remove(node, string)、class.has(string) - 新增/移除/判断是否含有class
+**12. class.add(node, string)、class.remove(node, string)、class.has(string) - 给node节点新增/移除/判断是否含有class属性
 
 - class.add(node, string)  表示给node节点新增一个值为string的class属性。
 - class.remove(node, string)  表示将node节点的值为string的class属性移除。
@@ -133,4 +133,15 @@ console.log(div); //<div class="header">div</div>
 console.log(dom.class.has(div, 'header'));  //true
 dom.class.remove(div, 'header');
 console.log(div); //<div class>div</div>
+```
+**13. on(node, eventName, callback)、off(node, eventName, callback) - 给node添加/移除事件监听函数
+
+- on(node, eventName, callback) 表示给node节点添加eventName的事件，回调函数为callback。
+- off(node, eventName, callback) 表示将node节点的eventName事件回调函数callback移除。
+```javascript
+let div = dom.create('<div>div</div>');
+dom.append(window.body, div);
+function fun() { console.log(0.0) }
+dom.on(div, 'click', fun);
+dom.off(div, 'click', fun);
 ```
