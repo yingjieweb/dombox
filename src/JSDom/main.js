@@ -38,36 +38,38 @@
 // console.log(span);  //<span>span</span>
 
 //7. empty
-let div = dom.create('<div>div</div>');
-let span = dom.create('<span>span</span>');
-let text = dom.create('<text>text</text>');
-dom.append(span, text);
-dom.append(div, span);
-console.log(div); //<div>div<span>span<text>text</text></span></div>
-let temp = dom.empty(div);
-console.log(div); //<div></div>
-console.log(temp) //[text, span]
+// let div = dom.create('<div><span>span</span><text>text</text></div>');
+// console.log(div); //<div><span>span</span><text>text</text></div>
+// let temp = dom.empty(div);
+// console.log(div); //<div></div>
+// console.log(temp) //[span, text]
 
-/*
 //8. attr
-dom.attr(div, 'id', 'web');
-console.log(dom.attr(div, 'id')); //web
+// let div = dom.create('<div>div</div>');
+// dom.attr(div, 'id', 'web');
+// console.log(dom.attr(div, 'id')); //web
 
 //9. text
-dom.text(div, 'this is a div');
-console.log(dom.text(div)); //this is a div
+// let div = dom.create('<div>div</div>');
+// console.log(dom.text(div)); //div
+// dom.text(div, 'this is a div');
+// console.log(dom.text(div)); //this is a div
 
 //10. html
-dom.html(div, '<span id="newSpan">span<span>');
-console.log(div); //<div id="web"><span id="newSpan"></span></div>
+// let div = dom.create('<div>div</div>');
+// console.log(dom.html(div));  //div
+// dom.html(div, '<span id="span">span</span>');
+// console.log(div); //<div><span id="newSpan"></span></div>
 
 //11. style
-dom.style(div, 'border', '1px solid red');
-console.log(div); //<div id="web" style="border:1px solid red;"><span id="newSpan"></span></div>
-console.log(dom.style(div, 'border'));  //1px solid red
-dom.style(div, {border: '1px solid green'});
-console.log(div); //<div id="web" style="border:1px solid green;"><span id="newSpan"></span></div>
+// let div = dom.create('<div>div</div>');
+// dom.style(div, 'border', '1px solid red');
+// console.log(div); //<div id="web" style="border:1px solid red;"><span id="newSpan"></span></div>
+// console.log(dom.style(div, 'border'));  //1px solid red
+// dom.style(div, {border: '1px solid green'});
+// console.log(div); //<div id="web" style="border:1px solid green;"><span id="newSpan"></span></div>
 
+/*
 //12. class
 dom.class.add(div, 'header');
 console.log(div); //<div id="web" class="header" style="border:1px solid green;"><span id="newSpan"></span></div>
