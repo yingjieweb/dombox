@@ -96,11 +96,11 @@ window.dom = {
       return node.classList.contains(className);
     }
   },
-  on: function (node, eventName, fn) { //13. on(){}
-    node.addEventListener(eventName, fn);
+  on: function (node, eventName, callback) { //13. on(){}
+    node.addEventListener(eventName, callback);
   },
-  off: function (node, eventName, fn) { //13. off(){}
-    node.removeEventListener(eventName, fn);
+  off: function (node, eventName, callback) { //13. off(){}
+    node.removeEventListener(eventName, callback);
   },
   find: function (selector, scope) { //14. find(){} scope为查找范围，是字符串，需要提前获取好
     return (scope || document).querySelectorAll(selector);//返回一个数组，注意在使用的时候加[0]
@@ -129,19 +129,17 @@ window.dom = {
     }
     return x;
   },
-  each: function (nodeList, fun) { //20. each(){}
+  each: function (nodeList, callback) { //20. each(){}
     for (let i = 0; i < nodeList.length; i++) {
-      fun.call(null, nodeList[i]);
+      callback.call(null, nodeList[i]);
     }
   },
   index: function (node) { //21. index(){}
     const list = dom.children(node.parentNode)
-    let i;
-    for (i = 0; i < list.length; i++) {
+    for (let i = 0; i < list.length; i++) {
       if (list[i] === node) {
-        break;
+        return i;
       }
     }
-    return i;
   }
 }
