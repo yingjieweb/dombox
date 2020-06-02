@@ -143,7 +143,7 @@ let div = dom.create('<div>div</div>');
 dom.append(window.body, div);
 function fun() { console.log(0.0) };  //定义callback
 dom.on(div, 'click', fun);  //给div节点新增点击事件
-dom.off(div, 'click', fun); //将div几点的点击事件移除
+dom.off(div, 'click', fun); //将div节点的点击事件移除
 ```
 **14. find(selector, scope)** - 获取标签或标签的集合，支持在指定范围内查找
 

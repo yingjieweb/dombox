@@ -74,7 +74,8 @@ console.log(span);  //<span>span</span>
 ```
 **7. empty(node)** - Clears all child elements within the node element
 
-&nbsp;&nbsp; empty(node) The parameter node is the element node whose content is to be cleared, and the method returns the removed child elements from the node as an array.
+&nbsp;&nbsp; empty(node) The parameter node is the element node whose content is to be cleared, and the method returns the removed 
+child elements from the node as an array.
 ```JavaScript
 let div = dom.create('<div><span>span</span><text>text</text></div>');
 console.log(div); //<div><span>span</span><text>text</text></div>
@@ -84,15 +85,17 @@ console.log(temp); //[span, text]
 ```
 **8. attr(node, name, value)** - Read and write the properties of the node
 
-&nbsp;&nbsp; attr(node, name, value) When three parameters are received, the name property of the node is set to value; when two parameters are received, the name property of the node is read and returned.
+&nbsp;&nbsp; attr(node, name, value) When three parameters are received, the name property of the node is set to value; when two 
+parameters are received, the name property of the node is read and returned.
 ```JavaScript
 let div = dom.create('<div>div</div>');
-dom.attr(div, 'id', 'web'); //设置div的id属性为web
-console.log(dom.attr(div, 'id')); //读取div的id属性：web
+dom.attr(div, 'id', 'web'); //Set the id property of div to web
+console.log(dom.attr(div, 'id')); //Read the id property of div: web
 ```
 **9. text(node, string)** - Read and write the text content of the node
 
-&nbsp;&nbsp; text(node, string) When receiving two parameters, the text content of the node will be set to string, and when receiving one parameter, the text content of the node will be read and returned.
+&nbsp;&nbsp; text(node, string) When receiving two parameters, the text content of the node will be set to string, and when receiving one 
+parameter, the text content of the node will be read and returned.
 ```JavaScript
 let div = dom.create('<div>div</div>');
 console.log(dom.text(div)); //div
@@ -101,7 +104,8 @@ console.log(dom.text(div)); //this is a div
 ```
 **10. html(node, string)** - Read and write the HTML content of the node
 
-&nbsp;&nbsp; html(node, string) When receiving two parameters, the HTML structure of the node will be set to string, and when receiving one parameter, the HTML structure of the node will be read and returned.
+&nbsp;&nbsp; html(node, string) When receiving two parameters, the HTML structure of the node will be set to string, and when receiving 
+one parameter, the HTML structure of the node will be read and returned.
 ```JavaScript
 let div = dom.create('<div>div</div>');
 console.log(dom.html(div));  //div
@@ -110,7 +114,8 @@ console.log(div); //<div><span id="newSpan"></span></div>
 ```
 **11. style(node, name, value)** - Read and write the style property of the node
 
-&nbsp;&nbsp; style(node, name, value) When receiving three parameters, node is the node to be set with the style property, name is the style property to be set for the node, and value is the property value of the corresponding style property.
+&nbsp;&nbsp; style(node, name, value) When receiving three parameters, node is the node to be set with the style property, name is the style 
+property to be set for the node, and value is the property value of the corresponding style property.
 
 &nbsp;&nbsp; style(node, name, value) When receiving two parameters, there are two cases according to the type of the name parameter. 
 If the name parameter is in the form of a string like `border` or `color`, the style method will read the value of the name attribute 
@@ -143,13 +148,14 @@ console.log(div); //<div class>div</div>
 ```JavaScript
 let div = dom.create('<div>div</div>');
 dom.append(window.body, div);
-function fun() { console.log(0.0) };  //定义callback
-dom.on(div, 'click', fun);  //给div节点新增点击事件
-dom.off(div, 'click', fun); //将div几点的点击事件移除
+function fun() { console.log(0.0) };  //Define the callback
+dom.on(div, 'click', fun);  //Add a click event to the div node
+dom.off(div, 'click', fun); //Removes the click event from the div node
 ```
 **14. find(selector, scope)** - Gets a tag or a collection of tags that support lookups within a specified range
 
-&nbsp;&nbsp; find(selector, scope) When two arguments are received, look for the selector within the scope scope. When you receive a parameter, look for a selector within the global document scope.
+&nbsp;&nbsp; find(selector, scope) When two arguments are received, look for the selector within the scope scope. When you receive a 
+parameter, look for a selector within the global document scope.
 ```JavaScript
 <div id="scope">
     <div id="first">first</div>
@@ -160,7 +166,8 @@ console.log(first_scope[0]);  //<div id="first">first</div>
 ```
 **15. parent(node)** - Gets the parent element of the node
 
-&nbsp;&nbsp; find(selector, scope) When two arguments are received, look for the selector within the scope scope. When you receive a parameter, look for a selector within the global document scope.
+&nbsp;&nbsp; find(selector, scope) When two arguments are received, look for the selector within the scope scope. When you receive a 
+parameter, look for a selector within the global document scope.
 ```JavaScript
 <div id="scope">
     <div id="first">first</div>
