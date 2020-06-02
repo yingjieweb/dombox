@@ -78,42 +78,43 @@
 // console.log(div); //<div class>div</div>
 
 //13. on & off
-let div = dom.create('<div>div</div>');
-dom.append(window.body, div);
-function fun() { console.log(0.0) }
-dom.on(div, 'click', fun);
-dom.off(div, 'click', fun);
+// let div = dom.create('<div>div</div>');
+// dom.append(window.body, div);
+// function callback() { console.log(0.0) }
+// dom.on(div, 'click', callback);
+// dom.off(div, 'click', callback);
 
-/*
 //14. find
-let scope = dom.find('#scope'); //内部调用querySelectorAll，返回数组
-let first_scope = dom.find('#first', scope[0]);  //使用的时候注意加 [0]
-console.log(first_scope[0]);  //使用的时候注意加 [0]
+// let scope = dom.find('#scope'); //内部调用querySelectorAll()，返回元素或元素集合
+// let first_scope = dom.find('#first', scope[0]);  //在指定范围scope[0]内查找
+// console.log(first_scope[0]);  //<div id="first">first</div>
 
 //15. parent
-let parent = dom.parent(dom.find('#scope')[0]);
-console.log(parent);  //<body>...</body>
+// let parent = dom.parent(dom.find('#scope')[0]);
+// console.log(parent);  //<body>...</body>
 
 //16. children
-let children = dom.children(dom.find('#scope')[0]);
-console.log(children);
+// let children = dom.children(dom.find('#scope')[0]);
+// console.log(children);  //[div#first, div#second, div#third]
 
 //17. siblings
-let siblings = dom.siblings(dom.find('#scope')[0]);
-console.log(siblings);
+// let siblings = dom.siblings(dom.find('#first')[0]);
+// console.log(siblings);  //[div#second, div#third]
 
 //18. next
-let next = dom.next(dom.find('#scope')[0]);
-console.log(next);
+// let next = dom.next(dom.find('#first')[0]);
+// console.log(next);  //<div id="second">second</div>
 
 //19. previous
-let previous = dom.previous(dom.find('#scope')[0]);
-console.log(previous);
+// let previous = dom.previous(dom.find('#second')[0]);
+// console.log(previous);  //<div id="first">first</div>
 
 //20. each()
-let first = dom.find('#first');
-dom.each(first, fun);
+// let nodeList = dom.children(dom.find('#scope')[0])
+// dom.each(nodeList, (item) => {
+//   item.style.color = 'red';
+// });
 
 //21. index
-let scope1 = dom.find('#scope');
-console.log(dom.index(scope1[0]));  //0*/
+// let first = dom.find('#first')[0];
+// console.log(dom.index(first));  //0

@@ -145,3 +145,90 @@ function fun() { console.log(0.0) };  //定义callback
 dom.on(div, 'click', fun);  //给div节点新增点击事件
 dom.off(div, 'click', fun); //将div几点的点击事件移除
 ```
+**14. find(selector, scope)** - 获取标签或标签的集合，支持在指定范围内查找
+
+&nbsp;&nbsp; find(selector, scope)接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+</div>
+let scope = dom.find('#scope'); //内部调用querySelectorAll()，返回元素或元素集合
+let first_scope = dom.find('#first', scope[0]);  //在指定范围scope[0]内查找
+console.log(first_scope[0]);  //<div id="first">first</div>
+```
+**15. parent(node)** - 获取node节点的父元素
+
+&nbsp;&nbsp; find(selector, scope)接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+</div>
+let parent = dom.parent(dom.find('#first')[0]);
+console.log(parent);  //<div id="scope">...</div>
+```
+**16. children(node)** - 获取node节点的所有子元素
+
+&nbsp;&nbsp; children(node) 获取node节点的所有子元素，并将所有子元素以伪数组的形式返回。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+    <div id="second">second</div>
+</div>
+let children = dom.children(dom.find('#scope')[0]);
+console.log(children);  //[div#first, div#second]
+```
+**17. siblings(node)** - 获取node节点的所有兄弟节点
+
+&nbsp;&nbsp; siblings(node) 获取node节点的所有兄弟节点，并将所有兄弟节点以数组的形式返回。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+    <div id="second">second</div>
+    <div id="third">third</div>
+</div>
+let children = dom.children(dom.find('#scope')[0]);
+console.log(children);  //[div#second, div#third]
+```
+**18. next(node)** - 获取node节点的后一个兄弟节点
+
+&nbsp;&nbsp; next(node) 获取node节点的后一个兄弟节点，并将其作为返回值，如果node节点后不存在其他节点，则返回null。
+```JavaScript
+<div id="first">first</div>
+<div id="second">second</div>
+let next = dom.next(dom.find('#first')[0]);
+console.log(next);  //<div id="second">second</div>
+```
+**19. previous(node)** - 获取node节点的前一个兄弟节点
+
+&nbsp;&nbsp; previous(node) 获取node节点的前一个兄弟节点，并将其作为返回值，如果node节点前不存在其他节点，则返回null。
+```JavaScript
+<div id="first">first</div>
+<div id="second">second</div>
+let previous = dom.previous(dom.find('#second')[0]);
+console.log(previous);  //<div id="first">first</div>
+```
+**20. each(nodeList, callback)** - 遍历nodeList内的所有节点，并给每个节点添加回调函数
+
+&nbsp;&nbsp; each(nodeList, callback) 遍历nodeList内的所有节点，并给每个节点添加一个回调函数，回调函数内可以设置相应的操作。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+    <div id="second">second</div>
+    <div id="third">third</div>
+</div>
+let nodeList = dom.children(dom.find('#scope')[0])
+dom.each(nodeList, (item) => {
+  item.style.color = 'red';
+});
+```
+**21. index(node)** - 获取node节点在其兄弟节点中的排序位次
+
+&nbsp;&nbsp; index(node) 返回node节点在其兄弟节点中的排序位置，并将所在位置的数字作为返回值。
+```JavaScript
+<div id="scope">
+    <div id="first">first</div>
+    <div id="second">second</div>
+</div>
+let first = dom.find('#first')[0];
+console.log(dom.index(first));  //0
+```
