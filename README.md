@@ -1,4 +1,4 @@
-## 打造属于你自己的 DOM API
+## Build your own DOM API
 <p align="center">
   <a href="https://github.com/yingjieweb/dombox"><img src="https://img.shields.io/badge/js%20dombox-%E4%B8%AD%E6%96%87-yellow" alt="js dombox"></a>
   <a href="https://github.com/yingjieweb/dombox/tree/master/lang/english/jsdom"><img src="https://img.shields.io/badge/js%20dombox-%E8%8B%B1%E6%96%87-yellow" alt="js dombox"></a>
@@ -147,7 +147,7 @@ dom.off(div, 'click', fun); //将div几点的点击事件移除
 ```
 **14. find(selector, scope)** - 获取标签或标签的集合，支持在指定范围内查找
 
-&nbsp;&nbsp; find(selector, scope)接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
+&nbsp;&nbsp; find(selector, scope) 接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
 ```JavaScript
 <div id="scope">
     <div id="first">first</div>
@@ -158,7 +158,7 @@ console.log(first_scope[0]);  //<div id="first">first</div>
 ```
 **15. parent(node)** - 获取node节点的父元素
 
-&nbsp;&nbsp; find(selector, scope)接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
+&nbsp;&nbsp; find(selector, scope) 接收两个参数时，在scope范围内查找selector。接收一个参数时，在全局document范围内查找selector。
 ```JavaScript
 <div id="scope">
     <div id="first">first</div>
