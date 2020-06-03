@@ -8,4 +8,8 @@
 
 ------
 
-This is an English jQuery dom documentation.
+&nbsp;&nbsp; Declaration: this document is in the process of study jQuery myself, try to write a jQuery to do a document, the strength of the packaging must not jQuery, 
+just as a reference manual self practice packaging ideas, if you want to use the jQuery development project, here recommend you to study the 
+ [jQuery's official website](https://www.jquery123.com/) , if you want to learn some packaging ideas, that the document is suitable for you.
+ 
+ 
