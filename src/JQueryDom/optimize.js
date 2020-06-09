@@ -1,16 +1,16 @@
 /**********************封装jquery：通过选择器拿到元素后，返回一个可以操作改元素的api对象 → 链式调用***************************/
-/*window.jQuery = function (selector) {
+window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);  //返回一个伪数组
   let api = {
-    addClass:function (className) { //这里用到闭包一直访问通过选择器获取的nodes
-      for (let i=0;i<nodes.length;i++){
+    addClass: function (className) { //这里用到闭包一直访问通过选择器获取的nodes
+      for (let i = 0; i < nodes.length; i++) {
         nodes[i].classList.add(className);
       }
       return api; //return api返回能操作nodes的对象，为了链式调用
     }
   }
   return api; //return api返回能操作nodes的对象，为了链式调用
-}*/
+}
 /***************************************return api改为return this******************************************************/
 /*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);
@@ -240,7 +240,7 @@
   }
 }*/
 /*****************siblings()获取兄弟、index()获取排行老几(从0开始)、next()获取弟弟、previous()获取哥哥**********************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string'){
     nodes = document.querySelectorAll(selectorOrArray);
@@ -301,6 +301,6 @@ window.jQuery = function (selectorOrArray) {
       return this.oldApi;
     }
   }
-}
+}*/
 /*********************************************bash alias***************************************************************/
 /*window.$ = window.jQuery;*/
