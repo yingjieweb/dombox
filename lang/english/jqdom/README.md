@@ -12,4 +12,6 @@
 just as a reference manual self practice packaging ideas, if you want to use the jQuery development project, here recommend you to study the 
  [jQuery's official website](https://www.jquery123.com/) , if you want to learn some packaging ideas, that the document is suitable for you.
  
- 
+&nbsp;&nbsp; With dombox encapsulation ideology is slightly different, jQuery is a global special function, the user can through the `window.jQuery (' selector ')` way 
+to call the function, is used to obtain the corresponding element, but the function return value is not the current element, but returns an object, known as the jQuery 
+structure of object, the object can operate on the corresponding element, this is the chain jQuery calls principle (closures).
