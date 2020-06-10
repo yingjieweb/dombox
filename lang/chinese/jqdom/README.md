@@ -29,15 +29,15 @@ window.jQuery = function (selector) {
 
 <div class="dom1"></div>
 window.jQuery('.dom1');  //jQuery 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom 元素
-window.jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
+jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 ```
 
-**2.jQuery('selector').addClass(className)** - 查找 selector 所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
+**2.jQuery('selector').addClass(className)** - 查找 selector 选择器所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
 ```javascript
 window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);  //返回一个伪数组
   let api = {
-    addClass: function (className) {
+    addClass: function (className) {  //给匹配selector选择器的元素添加class
       for (let i = 0; i < nodes.length; i++) {
         nodes[i].classList.add(className);
       }
@@ -46,4 +46,33 @@ window.jQuery = function (selector) {
   }
   return api; //return api返回能操作nodes的对象，为了链式调用
 }
+
+<div class="dom1"></div>
+jQuery('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
+console.log(jQuery('.dom1').print()); //NodeList [div.dom1.red]
+```
+
+
+
+
+
+
+
+**- 代码优化** - 
+```javascript
+window.$ = window.jQuery = function (selector) {  // 为 jQuery 起一个书写方便的别名 $
+  let nodes = document.querySelectorAll(selector);
+  return {  //删除 api 中间变量，直接 return api 对象
+    print: function () { 
+      console.log(nodes);
+      //return api; //return api 返回能操作 nodes 的对象，为了链式调用
+      return this; //举例：person.say('erha') === person.say.call(person,'erha'); return this 就是 return api
+    }
+  }
+  //return api; //return api 返回能操作 nodes 的对象，为了链式调用
+}
+
+<div class="dom1"></div>
+window.$('.dom1');  //$ 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom 元素
+window.$('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 ```

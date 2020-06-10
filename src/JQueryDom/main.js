@@ -1,9 +1,10 @@
 //return api
-window.jQuery('.dom1');  //jQuery 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom 元素
-window.jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
+// window.jQuery('.dom1');  //jQuery 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom 元素
+// jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 
 //addClass():添加class属性
-//jQuery('.dom1').addClass('red'); //以dom1为类名的元素被添加了red类名
+jQuery('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
+console.log(jQuery('.dom1').print()); //NodeList [div.dom1.red]
 
 //find():找当前元素的孩子
 //jQuery('.dom2').find('.child1').addClass('blue');  //dom2>chicken的元素被添加了blue类名

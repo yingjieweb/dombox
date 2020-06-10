@@ -1,5 +1,5 @@
 /**********************封装jquery：通过选择器拿到元素后，返回一个可以操作改元素的api对象 → 链式调用***************************/
-window.jQuery = function (selector) {
+/*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);  //返回一个伪数组
   let api = {
     addClass: function (className) { //这里用到闭包一直访问通过选择器获取的nodes
@@ -10,13 +10,13 @@ window.jQuery = function (selector) {
     }
   }
   return api; //return api返回能操作nodes的对象，为了链式调用
-}
+}*/
 /***************************************return api改为return this******************************************************/
 /*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);
   let api = {
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
+    addClass: function (className) {
+      for (let i = 0; i < nodes.length; i++) {
         nodes[i].classList.add(className);
       }
       return this; //举例：person.say('erha') === person.say.call(person,'erha'); return this 就是 return api
@@ -25,17 +25,17 @@ window.jQuery = function (selector) {
   return api;
 }*/
 /***************************************删除api变量，直接return对象******************************************************/
-/*window.jQuery = function (selector) {
+window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);  //返回一个伪数组
   return {           //删除中间变量api，直接返回操作元素的对象
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
+    addClass: function (className) {
+      for (let i = 0; i < nodes.length; i++) {
         nodes[i].classList.add(className);
       }
       return this;
     }
   }
-}*/
+}
 /**********************************************find()函数**************************************************************/
 /*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);
