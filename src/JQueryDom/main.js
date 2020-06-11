@@ -11,11 +11,13 @@
 // $('.dom1').find('.child1').print(); //NodeList [div.child1.blue]
 
 //end():返回上一级
-$('.dom1').find('.child1').addClass('blue').end().addClass('orange');  //dom1被添加了orange类名
-$('.dom1').print(); //NodeList [div.dom1.orange]
+// $('.dom1').find('.child1').addClass('blue').end().addClass('orange');  //dom1被添加了orange类名
+// $('.dom1').print(); //NodeList [div.dom1.orange]
 
 //each():为每个元素添加一个回调函数
-//jQuery('.dom4').find('.child1').each((node)=>{console.log(node)});  //<div class="child1">child1</div>
+$('.dom1').find('.child1').each((node) => {
+  console.log(node);
+});  //<div class="child1">child1</div>
 
 //print() & parent()
 //jQuery('.child1').parent().parent().print();

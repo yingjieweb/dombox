@@ -68,7 +68,7 @@
   }
 }*/
 /***********************************************end()函数**************************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -89,23 +89,24 @@ window.jQuery = function (selectorOrArray) {
       return this.oldApi; //这里的this指向新的api，新的api中存在一个oldApi属性(array.oldApi)
     }
   }
-}
+}*/
 /***********************************************each()函数*************************************************************/
-/*window.jQuery = function (selectorOrArray) {
+window.jQuery = function (selectorOrArray) {
   let nodes;
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){
+  } else if (selectorOrArray instanceof Array) {
     nodes = selectorOrArray;
   }
   return {
-    each(fun){  //参数为一个回调函数，每执行一次遍历操作，就调用一下回调操作，并传递一个nodes[i]给该回调函数
-      for (let i=0;i<nodes.length;i++){ //这个nodes为调用each()方法的api要操作的nodes
-        fun.call(null,nodes[i]);
+    each(fun) {  //参数为一个回调函数，每执行一次遍历操作，就调用一下回调操作，并传递一个nodes[i]给该回调函数
+      for (let i = 0; i < nodes.length; i++) { //这个nodes为调用each()方法的api要操作的nodes
+        fun.call(null, nodes[i]);
       }
+      return this;
     }
   }
-}*/
+}
 /**************************************print()函数 & parent()函数*******************************************************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;

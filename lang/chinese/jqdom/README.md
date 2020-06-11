@@ -101,7 +101,7 @@ $('.dom1').find('.child1').addClass('blue');  //dom1 > child1 的元素被添加
 $('.dom1').find('.child1').print(); //NodeList [div.child1.blue]
 ```
 
-**5.$(selector).find(selector1).end()** - end 方法用于返回上一级 api 操作的元素，如当前语法可返回一个可操作 selector 选择器对应元素的 api。
+**5.$(selector).find(selector1).end()** - end 方法用于返回上一级 api 操作的元素，如当前语法可返回一个可操作 selector 选择器对应元素的 api 对象。
 ```javascript
 window.$ = window.jQuery = function (selectorOrArray) {
   let nodes;
@@ -130,4 +130,31 @@ window.$ = window.jQuery = function (selectorOrArray) {
 </div>
 $('.dom1').find('.child1').addClass('blue').end().addClass('orange');  //dom1被添加了orange类名
 $('.dom1').print(); //NodeList [div.dom1.orange]
+```
+
+**6.$(selector).each(fun);** - each(fun) 方法用于查找 selector 选择器所匹配的元素，并给每个元素添加一个 fun 函数。
+```javascript
+window.$ = window.jQuery = function (selectorOrArray) {
+  let nodes;
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    nodes = selectorOrArray;
+  }
+  return {
+    each(fun) {  //参数为一个回调函数，每执行一次遍历操作，就调用一下回调操作，并传递一个nodes[i]给该回调函数
+      for (let i = 0; i < nodes.length; i++) { //这个nodes为调用each()方法的api要操作的nodes
+        fun.call(null, nodes[i]);
+      }
+      return this;
+    }
+  }
+}
+
+<div class="dom1">
+  <div class="child1">child1</div>
+</div>
+$('.dom1').find('.child1').each((node) => {
+  console.log(node);
+});  //<div class="child1">child1</div>
 ```

@@ -9,6 +9,12 @@ window.$ = window.jQuery = function (selectorOrArray) {
     print: function () {
       console.log(nodes);
     },
+    addClass: function (className) {
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].classList.add(className);
+      }
+      return this;
+    },
     find: function (selector) {
       let array = [];
       for (let i = 0; i < nodes.length; i++) {
@@ -17,10 +23,15 @@ window.$ = window.jQuery = function (selectorOrArray) {
       array.oldApi = this;
       return jQuery(array);
     },
+    oldApi: selectorOrArray.oldApi,
+    end: function () {
+      return this.oldApi;
+    },
     each(fun) {
       for (let i = 0; i < nodes.length; i++) {
         fun.call(null, nodes[i]);
       }
+      return this;
     },
     parent() {
       let parent = [];
@@ -45,16 +56,6 @@ window.$ = window.jQuery = function (selectorOrArray) {
         console.log(siblings);
       })
       return jQuery(siblings);
-    },
-    addClass: function (className) {
-      for (let i = 0; i < nodes.length; i++) {
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    oldApi: selectorOrArray.oldApi,
-    end: function () {
-      return this.oldApi;
     }
   }
 }
