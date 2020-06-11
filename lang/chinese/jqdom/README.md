@@ -159,7 +159,7 @@ $('.dom1').find('.child1').each((node) => {
 });  //<div class="child1">child1</div>
 ```
 
-**7.$(selector).parent()** - 
+**7.$(selector).parent()** - parent 方法用于查找 selector 选择器所匹配的元素的所有父元素。
 ```javascript
 window.$ = window.jQuery = function (selectorOrArray) {
   let nodes;
@@ -184,4 +184,31 @@ window.$ = window.jQuery = function (selectorOrArray) {
   <div class="child1">child1</div>
 </div>
 $('.child1').parent().print();  //[div.dom1]
+```
+
+**8.$(selector).children()** - children 方法用于查找 selector 选择器所匹配的元素的所有子元素。
+```javascript
+window.jQuery = function (selectorOrArray) {
+  let nodes;
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    nodes = selectorOrArray;
+  }
+  return {
+    children() {
+      let children = [];
+      this.each((node) => {
+        children.push(...node.children);  //node可能有多个children，需要用到数组解构赋值
+      })
+      return jQuery(children);  //为链式调用做准备，返回能操作children的api
+    }
+  }
+}
+
+<div class="dom1">
+  <div class="child1">child1</div>
+  <div class="child2">child2</div>
+</div>
+$('.dom1').children().print();  //[div.child1, div.child2]
 ```

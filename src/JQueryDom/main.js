@@ -20,10 +20,10 @@
 // });  //<div class="child1">child1</div>
 
 //print() & parent()
-$('.child1').parent().print();  //[div.dom1]
+// $('.child1').parent().print();  //[div.dom1]
 
 //children
-//jQuery('.dom5').children().print();
+$('.dom1').children().print();  //[div.child1, div.child2]
 
 //siblings
 //jQuery('.dom6').siblings().print();

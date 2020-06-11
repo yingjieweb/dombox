@@ -108,7 +108,7 @@
   }
 }*/
 /**************************************print()函数 & parent()函数*******************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -128,25 +128,25 @@ window.jQuery = function (selectorOrArray) {
       return jQuery(parent);  //要将parent数组对象化，为链式操作做准备
     }
   }
-}
+}*/
 /*******************************************children()函数*************************************************************/
-/*window.jQuery = function (selectorOrArray) {
+window.jQuery = function (selectorOrArray) {
   let nodes;
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){
+  } else if (selectorOrArray instanceof Array) {
     nodes = selectorOrArray;
   }
   return {
-    children(){
+    children() {
       let children = [];
-      this.each((node)=>{
+      this.each((node) => {
         children.push(...node.children);  //node可能有多个children，需要用到数组解构赋值
       })
       return jQuery(children);  //为链式调用做准备，返回能操作children的api
     }
   }
-}*/
+}
 /*****************siblings()获取兄弟、index()获取排行老几(从0开始)、next()获取弟弟、previous()获取哥哥**********************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;
