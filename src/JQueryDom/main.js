@@ -3,12 +3,12 @@
 // jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 
 //addClass():添加class属性
-// jQuery('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
-// console.log(jQuery('.dom1').print()); //NodeList [div.dom1.red]
+// $('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
+// $('.dom1').print(); //NodeList [div.dom1.red]
 
 //find():找当前元素的孩子
-// jQuery('.dom2').find('.child1').addClass('blue');  //dom2>chicken的元素被添加了blue类名
-// console.log(jQuery('.dom1').print());
+$('.dom1').find('.child1').addClass('blue');  //dom1 > child1 的元素被添加了blue类名
+$('.dom1').find('.child1').print(); //NodeList [div.child1.blue]
 
 //end():返回上一级
 //jQuery('.dom3').find('.child1').addClass('blue').end().addClass('orange');  //dom3被添加了orange类名

@@ -70,5 +70,33 @@ window.$ = window.jQuery = function (selector) {
 
 <div class="dom1"></div>
 $('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
-console.log($('.dom1').print()); //NodeList [div.dom1.red]
+$('.dom1').print(); //NodeList [div.dom1.red]
+```
+
+**4.jQuery('selector').find(selector1)** - 查找 selector 选择器所匹配的元素，并在其内部继续查找 selector1 所匹配到的元素。
+```javascript
+window.$ = window.jQuery = function (selectorOrArray) {
+  let nodes;  //考虑到作用域问题，声明的nodes放在if-else外面
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {  //find()函数可能会传递一个数组给jQuery选择器
+    nodes = selectorOrArray;
+  }
+  return {
+    find: function (selector) {  //find(){}
+      let array = [];
+      for (let i = 0; i < nodes.length; i++) {
+        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));  //querySelectorAll 得到的是一个伪数组
+      }
+      return jQuery(array); //返回新的一个jQuery对象，操作当前元素，这样可以继续实现链式操作
+    }
+  }
+}
+
+<div class="dom1">
+  <div class="child1">child1</div>
+  <div class="child2">child2</div>
+</div>
+$('.dom1').find('.child1').addClass('blue');  //dom1 > child1 的元素被添加了blue类名
+$('.dom1').find('.child1').print(); //NodeList [div.child1.blue]
 ```

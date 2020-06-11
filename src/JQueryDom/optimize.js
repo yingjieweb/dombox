@@ -50,7 +50,7 @@
   }
 }*/
 /***********************************************find()函数优化**********************************************************/
-/*window.jQuery = function (selectorOrArray) {
+window.jQuery = function (selectorOrArray) {
   let nodes;  //考虑到作用域问题，声明的nodes放在if-else外面
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -63,10 +63,10 @@
       for (let i = 0; i < nodes.length; i++) {
         array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));  //querySelectorAll 得到的是一个伪数组
       }
-      return jQuery(array); //返回新的一个jQuery对象，操作当前元素，这样可以实现链式操作
+      return jQuery(array); //返回新的一个jQuery对象，操作当前元素，这样可以继续实现链式操作
     }
   }
-}*/
+}
 /***********************************************end()函数**************************************************************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;
@@ -76,20 +76,6 @@
     nodes = selectorOrArray;
   }
   return {
-    find:function (selector) {
-      let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;  //find()在返回新的jQuery对象之前，先将老的api存到数组里，为end()做准备 —— 当前this指向旧的api
-      return jQuery(array); //将含有oldApi的array作为参数传递到jQuery中，会返回一个新的api对象，用来操作新的元素
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
     oldApi:selectorOrArray.oldApi,  //selectorOrArray参数就是find中的array，里面存了oldApi
     end:function(){
       return this.oldApi; //这里的this指向新的api，新的api中存在一个一个oldApi属性(array.oldApi)
@@ -105,28 +91,11 @@
     nodes = selectorOrArray;
   }
   return {
-    find:function (selector) {
-      let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;
-      return jQuery(array);
-    },
+
     each(fun){  //参数为一个回调函数，每执行一次遍历操作，就调用一下回调操作，并传递一个nodes[i]给该回调函数
       for (let i=0;i<nodes.length;i++){ //这个nodes为调用each()方法的api要操作的nodes
         fun.call(null,nodes[i]);
       }
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    oldApi:selectorOrArray.oldApi,
-    end:function(){
-      return this.oldApi;
     }
   }
 }*/
