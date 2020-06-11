@@ -15,12 +15,12 @@
 // $('.dom1').print(); //NodeList [div.dom1.orange]
 
 //each():为每个元素添加一个回调函数
-$('.dom1').find('.child1').each((node) => {
-  console.log(node);
-});  //<div class="child1">child1</div>
+// $('.dom1').find('.child1').each((node) => {
+//   console.log(node);
+// });  //<div class="child1">child1</div>
 
 //print() & parent()
-//jQuery('.child1').parent().parent().print();
+$('.child1').parent().print();  //[div.dom1]
 
 //children
 //jQuery('.dom5').children().print();

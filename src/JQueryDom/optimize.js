@@ -91,7 +91,7 @@
   }
 }*/
 /***********************************************each()函数*************************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -106,29 +106,29 @@ window.jQuery = function (selectorOrArray) {
       return this;
     }
   }
-}
+}*/
 /**************************************print()函数 & parent()函数*******************************************************/
-/*window.jQuery = function (selectorOrArray) {
+window.jQuery = function (selectorOrArray) {
   let nodes;
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){
+  } else if (selectorOrArray instanceof Array) {
     nodes = selectorOrArray;
   }
   return {
-    print:function(){ //打印api所操作的元素
+    print: function () { //打印api所操作的元素
       console.log(nodes);
     },
-    parent(){ //调用parent方法的对象可能是一个元素数组的api，则其要操作的元素的父元素可能为多个
+    parent() { //调用parent方法的对象可能是一个元素数组的api，则其要操作的元素的父元素可能为多个
       let parent = [];  //就需要定义一个数组，用来准备存储当前调用parent()方法的api内要操作的节点们的父元素
-      this.each((node)=>{ //this指代那些要找父元素的元素对象的api
+      this.each((node) => { //this指代那些要找父元素的元素对象的api
         if (parent.indexOf(node.parentNode) === -1)  //去重效果，避免多个元素的父元素一样，会打印多次
           parent.push(node.parentNode); //将找到的父元素存到parent数组中
       })
       return jQuery(parent);  //要将parent数组对象化，为链式操作做准备
     }
   }
-}*/
+}
 /*******************************************children()函数*************************************************************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;

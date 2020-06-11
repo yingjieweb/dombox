@@ -158,3 +158,30 @@ $('.dom1').find('.child1').each((node) => {
   console.log(node);
 });  //<div class="child1">child1</div>
 ```
+
+**7.$(selector).parent()** - 
+```javascript
+window.$ = window.jQuery = function (selectorOrArray) {
+  let nodes;
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    nodes = selectorOrArray;
+  }
+  return {
+    parent() { //调用parent方法的对象可能是一个元素数组的api，则其要操作的元素的父元素可能为多个
+      let parent = [];  //就需要定义一个数组，用来准备存储当前调用parent()方法的api内要操作的节点们的父元素
+      this.each((node) => { //this指代那些要找父元素的元素对象的api
+        if (parent.indexOf(node.parentNode) === -1)  //去重效果，避免多个元素的父元素一样，会打印多次
+          parent.push(node.parentNode); //将找到的父元素存到parent数组中
+      })
+      return jQuery(parent);  //要将parent数组对象化，为链式操作做准备
+    }
+  }
+}
+
+<div class="dom1">
+  <div class="child1">child1</div>
+</div>
+$('.child1').parent().print();  //[div.dom1]
+```
