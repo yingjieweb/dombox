@@ -50,7 +50,7 @@
   }
 }*/
 /***********************************************find()函数优化**********************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;  //考虑到作用域问题，声明的nodes放在if-else外面
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -66,22 +66,30 @@ window.jQuery = function (selectorOrArray) {
       return jQuery(array); //返回新的一个jQuery对象，操作当前元素，这样可以继续实现链式操作
     }
   }
-}
+}*/
 /***********************************************end()函数**************************************************************/
-/*window.jQuery = function (selectorOrArray) {
+window.jQuery = function (selectorOrArray) {
   let nodes;
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){
+  } else if (selectorOrArray instanceof Array) {
     nodes = selectorOrArray;
   }
   return {
-    oldApi:selectorOrArray.oldApi,  //selectorOrArray参数就是find中的array，里面存了oldApi
-    end:function(){
-      return this.oldApi; //这里的this指向新的api，新的api中存在一个一个oldApi属性(array.oldApi)
+    find:function (selector) {
+      let array = [];
+      for (let i=0;i<nodes.length;i++){
+        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
+      }
+      array.oldApi = this;  //find()在返回新的jQuery对象之前，先将老的api存到数组里，为end()做准备 —— 当前this指向旧的api
+      return jQuery(array); //将含有oldApi的array作为参数传递到jQuery中，会返回一个新的api对象，用来操作新的元素
+    },
+    oldApi: selectorOrArray.oldApi,  //selectorOrArray参数就是find中的array，里面存了oldApi
+    end: function () {
+      return this.oldApi; //这里的this指向新的api，新的api中存在一个oldApi属性(array.oldApi)
     }
   }
-}*/
+}
 /***********************************************each()函数*************************************************************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;
@@ -91,7 +99,6 @@ window.jQuery = function (selectorOrArray) {
     nodes = selectorOrArray;
   }
   return {
-
     each(fun){  //参数为一个回调函数，每执行一次遍历操作，就调用一下回调操作，并传递一个nodes[i]给该回调函数
       for (let i=0;i<nodes.length;i++){ //这个nodes为调用each()方法的api要操作的nodes
         fun.call(null,nodes[i]);
@@ -111,19 +118,6 @@ window.jQuery = function (selectorOrArray) {
     print:function(){ //打印api所操作的元素
       console.log(nodes);
     },
-    find:function (selector) {
-      let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    each(fun){
-      for (let i=0;i<nodes.length;i++){
-        fun.call(null,nodes[i]);
-      }
-    },
     parent(){ //调用parent方法的对象可能是一个元素数组的api，则其要操作的元素的父元素可能为多个
       let parent = [];  //就需要定义一个数组，用来准备存储当前调用parent()方法的api内要操作的节点们的父元素
       this.each((node)=>{ //this指代那些要找父元素的元素对象的api
@@ -131,16 +125,6 @@ window.jQuery = function (selectorOrArray) {
           parent.push(node.parentNode); //将找到的父元素存到parent数组中
       })
       return jQuery(parent);  //要将parent数组对象化，为链式操作做准备
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    oldApi:selectorOrArray.oldApi,
-    end:function(){
-      return this.oldApi;
     }
   }
 }*/
@@ -153,46 +137,12 @@ window.jQuery = function (selectorOrArray) {
     nodes = selectorOrArray;
   }
   return {
-    print:function(){
-      console.log(nodes);
-    },
-    find:function (selector) {
-      let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    each(fun){
-      for (let i=0;i<nodes.length;i++){
-        fun.call(null,nodes[i]);
-      }
-    },
-    parent(){
-      let parent = [];
-      this.each((node)=>{
-        if (parent.indexOf(node.parentNode) === -1)
-          parent.push(node.parentNode);
-      })
-      return jQuery(parent);
-    },
     children(){
       let children = [];
       this.each((node)=>{
         children.push(...node.children);  //node可能有多个children，需要用到数组解构赋值
       })
       return jQuery(children);  //为链式调用做准备，返回能操作children的api
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    oldApi:selectorOrArray.oldApi,
-    end:function(){
-      return this.oldApi;
     }
   }
 }*/
@@ -205,37 +155,6 @@ window.jQuery = function (selectorOrArray) {
     nodes = selectorOrArray;
   }
   return {
-    print:function(){
-      console.log(nodes);
-    },
-    find:function (selector) {
-      let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    each(fun){
-      for (let i=0;i<nodes.length;i++){
-        fun.call(null,nodes[i]);
-      }
-    },
-    parent(){
-      let parent = [];
-      this.each((node)=>{
-        if (parent.indexOf(node.parentNode) === -1)
-          parent.push(node.parentNode);
-      })
-      return jQuery(parent);
-    },
-    children(){
-      let children = [];
-      this.each((node)=>{
-        children.push(...node.children);
-      })
-      return jQuery(children);
-    },
     siblings(){ //调用siblings()方法的api所操作的元素可能是一个数组
       let siblings = [];  //所以需要用数组来存储其兄弟节点
       this.each((node)=>{ //each遍历每一个节点
@@ -246,17 +165,7 @@ window.jQuery = function (selectorOrArray) {
     },
     index(){},
     next(){},
-    previous(){},
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    oldApi:selectorOrArray.oldApi,
-    end:function(){
-      return this.oldApi;
-    }
+    previous(){}
   }
 }*/
 /*********************************************bash alias***************************************************************/

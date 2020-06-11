@@ -35,7 +35,7 @@ window.jQuery('.dom1');  //jQuery 为全局变量，window 可省略。返回一
 jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 ```
 
-**2. $ 别名** - 为 jQuery 起一个书写方便的别名 $，并优化封装代码（删除 api 中间变量）。
+**2. $ 基础别名** - 为 jQuery 起一个书写方便的别名 $，并优化封装代码（删除 api 中间变量）。
 ```javascript
 window.$ = window.jQuery = function (selector) {  // 为 jQuery 起一个书写方便的别名 $
   let nodes = document.querySelectorAll(selector);
@@ -54,7 +54,7 @@ window.$('.dom1');  //$ 为全局变量，window 可省略。返回一个 api �
 $('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 ```
 
-**3.jQuery('selector').addClass(className)** - 查找 selector 选择器所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
+**3.$('selector').addClass(className)** - addClass 方法用于查找 selector 选择器所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
 ```javascript
 window.$ = window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);
@@ -73,7 +73,7 @@ $('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 re
 $('.dom1').print(); //NodeList [div.dom1.red]
 ```
 
-**4.jQuery('selector').find(selector1)** - 查找 selector 选择器所匹配的元素，并在其内部继续查找 selector1 所匹配到的元素。
+**4.$('selector').find(selector1)** - find 方法用于查找 selector 选择器所匹配的元素，并在其内部继续查找 selector1 所匹配到的元素。
 ```javascript
 window.$ = window.jQuery = function (selectorOrArray) {
   let nodes;  //考虑到作用域问题，声明的nodes放在if-else外面
@@ -99,4 +99,35 @@ window.$ = window.jQuery = function (selectorOrArray) {
 </div>
 $('.dom1').find('.child1').addClass('blue');  //dom1 > child1 的元素被添加了blue类名
 $('.dom1').find('.child1').print(); //NodeList [div.child1.blue]
+```
+
+**5.$(selector).find(selector1).end()** - end 方法用于返回上一级 api 操作的元素，如当前语法可返回一个可操作 selector 选择器对应元素的 api。
+```javascript
+window.$ = window.jQuery = function (selectorOrArray) {
+  let nodes;
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    nodes = selectorOrArray;
+  }
+  return {
+    find:function (selector) {
+      let array = [];
+      for (let i=0;i<nodes.length;i++){
+        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
+      }
+      array.oldApi = this;  //find()在返回新的jQuery对象之前，先将老的api存到数组里，为end()做准备 —— 当前this指向旧的api
+      return jQuery(array); //将含有oldApi的array作为参数传递到jQuery中，会返回一个新的api对象，用来操作新的元素
+    },
+    oldApi: selectorOrArray.oldApi,  //selectorOrArray参数就是find中的array，里面存了oldApi
+    end: function () {
+      return this.oldApi; //这里的this指向新的api，新的api中存在一个一个oldApi属性(array.oldApi)
+    }
+  }
+}
+<div class="dom1">
+  <div class="child1">child1</div>
+</div>
+$('.dom1').find('.child1').addClass('blue').end().addClass('orange');  //dom1被添加了orange类名
+$('.dom1').print(); //NodeList [div.dom1.orange]
 ```
