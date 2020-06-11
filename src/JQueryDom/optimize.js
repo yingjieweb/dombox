@@ -25,7 +25,7 @@
   return api;
 }*/
 /***************************************删除api变量，直接return对象******************************************************/
-window.jQuery = function (selector) {
+/*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);  //返回一个伪数组
   return {           //删除中间变量api，直接返回操作元素的对象
     addClass: function (className) {
@@ -35,47 +35,35 @@ window.jQuery = function (selector) {
       return this;
     }
   }
-}
+}*/
 /**********************************************find()函数**************************************************************/
 /*window.jQuery = function (selector) {
   let nodes = document.querySelectorAll(selector);
   return {
-    find:function (selector) {  //find(){}
+    find: function (selector) {  //find(){}
       let array = [];
-      for (let i=0;i<nodes.length;i++){
+      for (let i = 0; i < nodes.length; i++) {
         array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
       }
       return array; //返回选中的元素数组，这样将不能继续链式调用，进行如下优化
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
     }
   }
 }*/
 /***********************************************find()函数优化**********************************************************/
 /*window.jQuery = function (selectorOrArray) {
   let nodes;  //考虑到作用域问题，声明的nodes放在if-else外面
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){  //find()函数可能会传递一个数组给jQuery选择器
+  } else if (selectorOrArray instanceof Array) {  //find()函数可能会传递一个数组给jQuery选择器
     nodes = selectorOrArray;
   }
   return {
-    find:function (selector) {  //find(){}
+    find: function (selector) {  //find(){}
       let array = [];
-      for (let i=0;i<nodes.length;i++){
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
+      for (let i = 0; i < nodes.length; i++) {
+        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));  //querySelectorAll 得到的是一个伪数组
       }
       return jQuery(array); //返回新的一个jQuery对象，操作当前元素，这样可以实现链式操作
-    },
-    addClass:function (className) {
-      for (let i=0;i<nodes.length;i++){
-        nodes[i].classList.add(className);
-      }
-      return this;
     }
   }
 }*/

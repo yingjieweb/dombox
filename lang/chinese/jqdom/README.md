@@ -14,6 +14,9 @@
 &nbsp;&nbsp; 与 dombox 的封装思想略有不同，jQuery 是一个全局的特殊函数，用户可以通过 `window.jQuery('selector')` 的方式调用该函数，用于获取对应的元素，
 但是该函数的返回值却不是当前元素，而是返回一个对象，称为 jQuery 构造出来的对象，这个对象可以操作当前对应的元素，这就是 jQuery 的链式调用原理（闭包）。
 
+&nbsp;&nbsp; 注意：jQuery 是一个全局的特殊函数，虽然其构造了一些东西（操作元素的 api 对象），但其实际上并不属于构造函数，因为普通的构造函数一般在声明的时候
+需要 new 关键字，而 jQuery 是一个不需要加 new 关键字的构造函数，严格意义上说 jQuery 并不能成为之是构造韩式，其思想只是使用了一些编程的技巧。
+
 **1. 链式调用** - jQuery 在查找节点或操作节点后，并不会返回节点本身，而是返回一个可以操作当前节点的 api 对象，从而实现 jQuery 的链式风格。
 ```javascript
 window.jQuery = function (selector) {
@@ -32,33 +35,7 @@ window.jQuery('.dom1');  //jQuery 为全局变量，window 可省略。返回一
 jQuery('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
 ```
 
-**2.jQuery('selector').addClass(className)** - 查找 selector 选择器所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
-```javascript
-window.jQuery = function (selector) {
-  let nodes = document.querySelectorAll(selector);  //返回一个伪数组
-  let api = {
-    addClass: function (className) {  //给匹配selector选择器的元素添加class
-      for (let i = 0; i < nodes.length; i++) {
-        nodes[i].classList.add(className);
-      }
-      return api; //return api返回能操作nodes的对象，为了链式调用
-    }
-  }
-  return api; //return api返回能操作nodes的对象，为了链式调用
-}
-
-<div class="dom1"></div>
-jQuery('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
-console.log(jQuery('.dom1').print()); //NodeList [div.dom1.red]
-```
-
-
-
-
-
-
-
-**- 代码优化** - 
+**2. $ 别名** - 为 jQuery 起一个书写方便的别名 $，并优化封装代码（删除 api 中间变量）。
 ```javascript
 window.$ = window.jQuery = function (selector) {  // 为 jQuery 起一个书写方便的别名 $
   let nodes = document.querySelectorAll(selector);
@@ -73,6 +50,25 @@ window.$ = window.jQuery = function (selector) {  // 为 jQuery 起一个书写�
 }
 
 <div class="dom1"></div>
-window.$('.dom1');  //$ 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom 元素
-window.$('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
+window.$('.dom1');  //$ 为全局变量，window 可省略。返回一个 api 对象，该对象可操作当前 .dom1 元素
+$('.dom1').print();  //NodeList [div.dom1]。 print 函数也返回一个 api 对象，这样即可一直链式调用下去
+```
+
+**3.jQuery('selector').addClass(className)** - 查找 selector 选择器所匹配的元素，并给每个元素添加一个值为 className 的 class 属性。
+```javascript
+window.$ = window.jQuery = function (selector) {
+  let nodes = document.querySelectorAll(selector);
+  return {
+    addClass: function (className) {  //给匹配 selector 选择器的元素添加 class
+      for (let i = 0; i < nodes.length; i++) {
+        nodes[i].classList.add(className);
+      }
+      return this;  //return this 就是 return api
+    }
+  }
+}
+
+<div class="dom1"></div>
+$('.dom1').addClass('red');  //给 class 为 dom1 的元素添加一个值为 red 的 class 属性，可继续链式调用下去
+console.log($('.dom1').print()); //NodeList [div.dom1.red]
 ```
