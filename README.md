@@ -8,7 +8,7 @@
 
 ------
 
-&nbsp;&nbsp; dombox 是一个高效、精简并且功能丰富的JavaScript工具库。它提供的API易于使用，这让诸如HTML文档遍历和操作、事件处
+&nbsp;&nbsp; dombox 是一个高效、精简、功能丰富的 JavaScript 工具库。它提供的 API 易于使用，这让诸如 HTML 文档遍历和操作、事件处
 理操作更加简单。可以下载 dombox.zip 解压后将 jsdom.js 文件以 `<script src='./jsdom.js'></script>` 的方式引入项目中。
 
 &nbsp;&nbsp; 根据上述步骤将 jsdom 引入项目中后，可以通过 dom.API 的方式对 dombox 库中封装好的方法进行调用，具体的 API 详细介绍
