@@ -232,3 +232,6 @@ dom.each(nodeList, (item) => {
 let first = dom.find('#first')[0];
 console.log(dom.index(first));  //0
 ```
+
+&nbsp;&nbsp; **最后**：[这是源码链接](https://github.com/yingjieweb/dombox/blob/master/src/JSDom/jsdom.js) ，该插件如有改进会
+第一时间发布到这里，如果大家有发现错误或有性能优化的好点子可直接在相应文档进行编辑修改。欢迎提交对本仓库的改进建议~

@@ -241,3 +241,7 @@ dom.each(nodeList, (item) => {
 let first = dom.find('#first')[0];
 console.log(dom.index(first));  //0
 ```
+
+&nbsp;&nbsp; **Finally**：[Source link](https://github.com/yingjieweb/dombox/blob/master/src/JSDom/jsdom.js) ,
+Improvements to the plugin will be posted here as soon as possible, and if you find bugs or have good ideas for performance optimization, 
+you can edit and modify the plugin directly in the corresponding document. Suggestions for improvement of the warehouse are welcome ~
