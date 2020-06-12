@@ -17,6 +17,10 @@
 &nbsp;&nbsp; 注意：jQuery 是一个全局的特殊函数，虽然其构造了一些东西（操作元素的 api 对象），但其实际上并不属于构造函数，因为普通的构造函数一般在声明的时候
 需要 new 关键字，而 jQuery 是一个不需要加 new 关键字的构造函数，严格意义上说 jQuery 并不能成为之是构造韩式，其思想只是使用了一些编程的技巧。
 
+&nbsp;&nbsp; 注意：由于 jQuery 的主要封装思想是链式操作，所以需要在每一步返回可操作当前元素的 api 对象，该对象并不是 DOM 元素，它不能使用 DOM 相关的 API，
+如：querySelector()、appendChild()，而是只能使用 jQuery 相关的 API，如：find()、each()。但是在实际的开发工作中，为了更好的明确是 DOM 元素还是 jQuery
+元素，我们一般做一些规范性的规定，jQuery 返回的 api 对象采取前加 $ 标记的命名风格，如：`let $div = jQuery('.div');`。
+
 **1. 链式调用** - jQuery 在查找节点或操作节点后，并不会返回节点本身，而是返回一个可以操作当前节点的 api 对象，从而实现 jQuery 的链式风格。
 ```javascript
 window.jQuery = function (selector) {
@@ -211,4 +215,31 @@ window.jQuery = function (selectorOrArray) {
   <div class="child2">child2</div>
 </div>
 $('.dom1').children().print();  //[div.child1, div.child2]
+```
+
+**9. $(selector).siblings()** - siblings 方法用于查找 selector 选择器所匹配的元素的所有兄弟元素。
+```javascript
+window.jQuery = function (selectorOrArray) {
+  let nodes;
+  if (typeof selectorOrArray === 'string') {
+    nodes = document.querySelectorAll(selectorOrArray);
+  } else if (selectorOrArray instanceof Array) {
+    nodes = selectorOrArray;
+  }
+  return {
+    siblings() { //调用siblings()方法的api所操作的元素可能是一个数组
+      let siblings = [];  //所以需要用数组来存储其兄弟节点
+      this.each((node) => { //each遍历每一个节点
+        siblings.push(...Array.from(node.parentNode.children));
+        siblings.filter(item => !item.indexOf(siblings));
+      })
+      return jQuery(siblings);
+    }
+  }
+}
+
+<div class="child1">child1</div>
+<div class="child2">child2</div>
+<div class="child3">child3</div>
+$('.child1').siblings().print(); //[div.child2, div.child3]
 ```

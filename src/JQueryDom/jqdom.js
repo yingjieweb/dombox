@@ -27,13 +27,13 @@ window.$ = window.jQuery = function (selectorOrArray) {
     end: function () {
       return this.oldApi;
     },
-    each(fun) {
+    each: function (fun) {
       for (let i = 0; i < nodes.length; i++) {
         fun.call(null, nodes[i]);
       }
       return this;
     },
-    parent() {
+    parent: function () {
       let parent = [];
       this.each((node) => {
         if (parent.indexOf(node.parentNode) === -1)
@@ -41,14 +41,14 @@ window.$ = window.jQuery = function (selectorOrArray) {
       })
       return jQuery(parent);
     },
-    children() {
+    children: function () {
       let children = [];
       this.each((node) => {
         children.push(...node.children);
       })
       return jQuery(children);
     },
-    siblings() { //调用siblings()方法的api所操作的元素可能是一个数组
+    siblings: function () { //调用siblings()方法的api所操作的元素可能是一个数组
       let siblings = [];  //所以需要用数组来存储其兄弟节点
       let array = [];
       this.each((node) => { //each遍历每一个节点

@@ -130,7 +130,7 @@
   }
 }*/
 /*******************************************children()函数*************************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -146,28 +146,25 @@ window.jQuery = function (selectorOrArray) {
       return jQuery(children);  //为链式调用做准备，返回能操作children的api
     }
   }
-}
-/*****************siblings()获取兄弟、index()获取排行老几(从0开始)、next()获取弟弟、previous()获取哥哥**********************/
-/*window.jQuery = function (selectorOrArray) {
+}*/
+/*************************************************siblings()函数*******************************************************/
+window.jQuery = function (selectorOrArray) {
   let nodes;
-  if (typeof selectorOrArray === 'string'){
+  if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
-  }else if (selectorOrArray instanceof Array){
+  } else if (selectorOrArray instanceof Array) {
     nodes = selectorOrArray;
   }
   return {
-    siblings(){ //调用siblings()方法的api所操作的元素可能是一个数组
+    siblings() { //调用siblings()方法的api所操作的元素可能是一个数组
       let siblings = [];  //所以需要用数组来存储其兄弟节点
-      this.each((node)=>{ //each遍历每一个节点
+      this.each((node) => { //each遍历每一个节点
         siblings.push(...Array.from(node.parentNode.children));
         siblings.filter(item => !item.indexOf(siblings));
       })
       return jQuery(siblings);
-    },
-    index(){},
-    next(){},
-    previous(){}
+    }
   }
-}*/
+}
 /*********************************************bash alias***************************************************************/
 /*window.$ = window.jQuery;*/

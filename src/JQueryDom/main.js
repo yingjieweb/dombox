@@ -19,12 +19,28 @@
 //   console.log(node);
 // });  //<div class="child1">child1</div>
 
-//print() & parent()
+//print() & parent():查找父节点
 // $('.child1').parent().print();  //[div.dom1]
 
-//children
-$('.dom1').children().print();  //[div.child1, div.child2]
+//children():查找子节点
+// $('.dom1').children().print();  //[div.child1, div.child2]
 
-//siblings
-//jQuery('.dom6').siblings().print();
+//siblings():查找兄弟节点
+// $('.child1').siblings().print(); //[div.child2, div.child3]
 
+//index()
+//previous()
+//next()
+
+//新增
+//appendTo()
+
+//remove()
+//empty()
+
+//text()
+//html()
+//attr()
+//css()
+//on()
+//off()
