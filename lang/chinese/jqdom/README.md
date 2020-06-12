@@ -243,3 +243,31 @@ window.jQuery = function (selectorOrArray) {
 <div class="child3">child3</div>
 $('.child1').siblings().print(); //[div.child2, div.child3]
 ```
+
+**10.$('<div class="new">div<div>')** - jQuery 接收这种形式的串时，其内部调用 createElement() 用于创建新的元素。
+```javascript
+window.jQuery = function (selectorOrArrayOrTemplate) {
+  let nodes;
+  if (typeof selectorOrArrayOrTemplate === "string") {
+    if (selectorOrArrayOrTemplate[0] === "<") { // 创建 div
+      nodes = [createElement(selectorOrArrayOrTemplate)];
+    } else {  // 查找 div
+      nodes = document.querySelectorAll(selectorOrArrayOrTemplate);
+    }
+  } else if (selectorOrArrayOrTemplate instanceof Array) {
+    nodes = selectorOrArrayOrTemplate;
+  }
+  function createElement(string) {
+    const container = document.createElement("template");
+    container.innerHTML = string.trim();
+    return container.content.firstChild;
+  }
+  return {
+    print: function () { //打印api所操作的元素
+      console.log(nodes);
+    }
+  }
+}
+
+$('<div class="new">div<div>').print(); //[div.new]
+```

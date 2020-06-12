@@ -148,7 +148,7 @@
   }
 }*/
 /*************************************************siblings()函数*******************************************************/
-window.jQuery = function (selectorOrArray) {
+/*window.jQuery = function (selectorOrArray) {
   let nodes;
   if (typeof selectorOrArray === 'string') {
     nodes = document.querySelectorAll(selectorOrArray);
@@ -163,6 +163,29 @@ window.jQuery = function (selectorOrArray) {
         siblings.filter(item => !item.indexOf(siblings));
       })
       return jQuery(siblings);
+    }
+  }
+}*/
+/******************************************createElement()*************************************************************/
+window.jQuery = function (selectorOrArrayOrTemplate) {
+  let nodes;
+  if (typeof selectorOrArrayOrTemplate === "string") {
+    if (selectorOrArrayOrTemplate[0] === "<") { // 创建 div
+      nodes = [createElement(selectorOrArrayOrTemplate)];
+    } else {  // 查找 div
+      nodes = document.querySelectorAll(selectorOrArrayOrTemplate);
+    }
+  } else if (selectorOrArrayOrTemplate instanceof Array) {
+    nodes = selectorOrArrayOrTemplate;
+  }
+  function createElement(string) {
+    const container = document.createElement("template");
+    container.innerHTML = string.trim();
+    return container.content.firstChild;
+  }
+  return {
+    print: function () { //打印api所操作的元素
+      console.log(nodes);
     }
   }
 }

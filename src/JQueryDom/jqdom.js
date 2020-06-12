@@ -1,10 +1,21 @@
-window.$ = window.jQuery = function (selectorOrArray) {
+window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
   let nodes;
-  if (typeof selectorOrArray === 'string') {
-    nodes = document.querySelectorAll(selectorOrArray);
-  } else if (selectorOrArray instanceof Array) {
-    nodes = selectorOrArray;
+  if (typeof selectorOrArrayOrTemplate === "string") {
+    if (selectorOrArrayOrTemplate[0] === "<") { // 创建 div
+      nodes = [createElement(selectorOrArrayOrTemplate)];
+    } else {  // 查找 div
+      nodes = document.querySelectorAll(selectorOrArrayOrTemplate);
+    }
+  } else if (selectorOrArrayOrTemplate instanceof Array) {
+    nodes = selectorOrArrayOrTemplate;
   }
+
+  function createElement(string) {
+    const container = document.createElement("template");
+    container.innerHTML = string.trim();
+    return container.content.firstChild;
+  }
+
   return {
     print: function () {
       console.log(nodes);
@@ -23,7 +34,7 @@ window.$ = window.jQuery = function (selectorOrArray) {
       array.oldApi = this;
       return jQuery(array);
     },
-    oldApi: selectorOrArray.oldApi,
+    oldApi: selectorOrArrayOrTemplate.oldApi,
     end: function () {
       return this.oldApi;
     },

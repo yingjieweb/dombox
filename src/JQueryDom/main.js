@@ -32,7 +32,8 @@
 //previous()
 //next()
 
-//新增
+//createElement()
+$('<div class="new">div<div>').print(); //[div.new]
 //appendTo()
 
 //remove()
