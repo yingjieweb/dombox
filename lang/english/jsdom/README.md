@@ -13,7 +13,7 @@ making things like HTML document traversal and manipulation, and event manipulat
 it to introduce jsdom.js files into the project in the form of `<script src='./jsdom.js'></script>`.
 
 &nbsp;&nbsp; After introducing jsdom into the project according to the above steps, you can call the encapsulated methods in the dombox 
-library by means of dom.API. The specific API is described below in detail.Refer to the following documentation for use:
+library by means of dom.API. The specific API is described below in detail. Refer to the following documentation for use:
 
 **1. create(node)** - Create a new dom node or element
 
@@ -160,7 +160,7 @@ parameter, look for a selector within the global document scope.
 <div id="scope">
     <div id="first">first</div>
 </div>
-let scope = dom.find('#scope'); //Internally, querySelectorAll() is called to return an element or a collection of elements
+let scope = dom.find('#scope'); //querySelectorAll() is called to return an element or a collection of elements
 let first_scope = dom.find('#first', scope[0]);  //Lookup within the specified scope[0]
 console.log(first_scope[0]);  //<div id="first">first</div>
 ```
