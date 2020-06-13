@@ -12,7 +12,7 @@
 理操作更加简单。可以下载 dombox.zip 解压后将 jsdom.js 文件以 `<script src='./jsdom.js'></script>` 的方式引入项目中。
 
 &nbsp;&nbsp; 根据上述步骤将 jsdom 引入项目中后，可以通过 dom.API 的方式对 dombox 库中封装好的方法进行调用，具体的 API 详细介绍
-如下，相信你在使用的过程中一定会觉得本库比 JavaScript 的原生 API 高效的多。
+如下，相信你在使用的过程中一定会觉得本库比 JavaScript 的原生 API 高效的多。具体使用可参考如下文档：
 
 **1. create(node)** - 创建新的 dom 节点或元素
 

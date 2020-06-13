@@ -13,7 +13,7 @@ making things like HTML document traversal and manipulation, and event manipulat
 it to introduce jsdom.js files into the project in the form of `<script src='./jsdom.js'></script>`.
 
 &nbsp;&nbsp; After introducing jsdom into the project according to the above steps, you can call the encapsulated methods in the dombox 
-library by means of dom.API. The specific API is described below in detail.
+library by means of dom.API. The specific API is described below in detail.Refer to the following documentation for use:
 
 **1. create(node)** - Create a new dom node or element
 
