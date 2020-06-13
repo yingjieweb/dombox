@@ -271,3 +271,41 @@ window.jQuery = function (selectorOrArrayOrTemplate) {
 
 $('<div class="new">div<div>').print(); //[div.new]
 ```
+
+**★ jquery.prototype** - 上述的封装方式在使用的过程中，基本上每一步的链式操作都会返回一个新的 api 对象，这样不免会造成内存的浪费，所以我们
+可以把这个 api 对象中公共的函数放到 jQuery 的原型上，每一步链式操作都返回这个 jQuery 原型对象，这样就可以避免内存的浪费。
+```javascript
+window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
+  let nodes;
+  if (typeof selectorOrArrayOrTemplate === "string") {
+    if (selectorOrArrayOrTemplate[0] === "<") { // 创建 div
+      nodes = [createElement(selectorOrArrayOrTemplate)];
+    } else {  // 查找 div
+      nodes = document.querySelectorAll(selectorOrArrayOrTemplate);
+    }
+  } else if (selectorOrArrayOrTemplate instanceof Array) {
+    nodes = selectorOrArrayOrTemplate;
+  }
+
+  function createElement(string) {
+    const container = document.createElement("template");
+    container.innerHTML = string.trim();
+    return container.content.firstChild;
+  }
+
+  const api = Object.create(jQuery.prototype) // 创建一个 api 对象: api.__protp__ === jQuery.prototype  // const api = {__proto__: jQuery.prototype}
+  Object.assign(api, {  //相当于： api.elements = elements; api.oldApi = selectorOrArrayOrTemplate.oldApi;
+    nodes: nodes,
+    oldApi: selectorOrArrayOrTemplate.oldApi
+  })
+  return api;
+}
+
+jQuery.prototype = {
+  constructor: jQuery,
+  //...那些封装的 api 方法
+}
+```
+&nbsp;&nbsp; **最后**：[这是源码链接](https://github.com/yingjieweb/dombox/blob/master/src/JQueryDom/jqdom.js) ，以上是 jQuery
+的基本封装思想，上述封装的 api 仅作为研究封装思想的例子，如果你想深入学习 jQuery，还是推荐你到 [jQuery官网](https://www.jquery123.com/)
+进行学习。后续如果源码有改动的话会第一时间发布到这里，如果大家有发现错误或有性能优化的好点子可直接在相应文档进行编辑修改。欢迎提交对本仓库的改进建议~

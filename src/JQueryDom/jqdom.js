@@ -16,57 +16,64 @@ window.$ = window.jQuery = function (selectorOrArrayOrTemplate) {
     return container.content.firstChild;
   }
 
-  return {
-    print: function () {
-      console.log(nodes);
-    },
-    addClass: function (className) {
-      for (let i = 0; i < nodes.length; i++) {
-        nodes[i].classList.add(className);
-      }
-      return this;
-    },
-    find: function (selector) {
-      let array = [];
-      for (let i = 0; i < nodes.length; i++) {
-        array = array.concat(Array.from(nodes[i].querySelectorAll(selector)));
-      }
-      array.oldApi = this;
-      return jQuery(array);
-    },
-    oldApi: selectorOrArrayOrTemplate.oldApi,
-    end: function () {
-      return this.oldApi;
-    },
-    each: function (fun) {
-      for (let i = 0; i < nodes.length; i++) {
-        fun.call(null, nodes[i]);
-      }
-      return this;
-    },
-    parent: function () {
-      let parent = [];
-      this.each((node) => {
-        if (parent.indexOf(node.parentNode) === -1)
-          parent.push(node.parentNode);
-      })
-      return jQuery(parent);
-    },
-    children: function () {
-      let children = [];
-      this.each((node) => {
-        children.push(...node.children);
-      })
-      return jQuery(children);
-    },
-    siblings: function () { //调用siblings()方法的api所操作的元素可能是一个数组
-      let siblings = [];  //所以需要用数组来存储其兄弟节点
-      let array = [];
-      this.each((node) => { //each遍历每一个节点
-        siblings.push(...Array.from(node.parentNode.children).filter(item => item !== node));
-        console.log(siblings);
-      })
-      return jQuery(siblings);
+  const api = Object.create(jQuery.prototype) // 创建一个 api 对象: api.__protp__ === jQuery.prototype  // const api = {__proto__: jQuery.prototype}
+  Object.assign(api, {  //相当于： api.elements = elements; api.oldApi = selectorOrArrayOrTemplate.oldApi;
+    nodes: nodes,
+    oldApi: selectorOrArrayOrTemplate.oldApi
+  })
+  return api;
+}
+
+jQuery.prototype = {
+  constructor: jQuery,
+  print: function () {
+    console.log(this.nodes);
+  },
+  addClass: function (className) {
+    for (let i = 0; i < this.nodes.length; i++) {
+      this.nodes[i].classList.add(className);
     }
+    return this;
+  },
+  find: function (selector) {
+    let array = [];
+    for (let i = 0; i < this.nodes.length; i++) {
+      array = array.concat(Array.from(this.nodes[i].querySelectorAll(selector)));
+    }
+    array.oldApi = this;
+    return jQuery(array);
+  },
+  end: function () {
+    return this.oldApi;
+  },
+  each: function (fun) {
+    for (let i = 0; i < this.nodes.length; i++) {
+      fun.call(null, this.nodes[i]);
+    }
+    return this;
+  },
+  parent: function () {
+    let parent = [];
+    this.each((node) => {
+      if (parent.indexOf(node.parentNode) === -1)
+        parent.push(node.parentNode);
+    })
+    return jQuery(parent);
+  },
+  children: function () {
+    let children = [];
+    this.each((node) => {
+      children.push(...node.children);
+    })
+    return jQuery(children);
+  },
+  siblings: function () {
+    let siblings = [];
+    let array = [];
+    this.each((node) => {
+      siblings.push(...Array.from(node.parentNode.children).filter(item => item !== node));
+      console.log(siblings);
+    })
+    return jQuery(siblings);
   }
 }
