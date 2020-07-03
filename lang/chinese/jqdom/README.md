@@ -244,7 +244,7 @@ window.jQuery = function (selectorOrArray) {
 $('.child1').siblings().print(); //[div.child2, div.child3]
 ```
 
-**10.$('<div class="new">div<div>')** - jQuery 接收这种形式的串时，其内部调用 createElement() 用于创建新的元素。
+**10. $('`<div class="new">div<div>`')** - jQuery 接收这种形式的串时，其内部调用 createElement() 用于创建新的元素。
 ```javascript
 window.jQuery = function (selectorOrArrayOrTemplate) {
   let nodes;

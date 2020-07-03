@@ -249,7 +249,7 @@ window.jQuery = function (selectorOrArray) {
 $('.child1').siblings().print(); //[div.child2, div.child3]
 ```
 
-**10.$('<div class="new">div<div>')** - When jQuery receives a string of this form, it internally calls createElement() to create a new element.
+**10. $('`<div class="new">div<div>`')** - When jQuery receives a string of this form, it internally calls createElement() to create a new element.
 ```javascript
 window.jQuery = function (selectorOrArrayOrTemplate) {
   let nodes;
