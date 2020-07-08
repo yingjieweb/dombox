@@ -2,8 +2,6 @@
 /node_modules
 /dist
 /idea
-/yarn-error.log
-/package-lock
 
 # local env files
 .env.local
@@ -22,4 +20,3 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
-package-lock.json
